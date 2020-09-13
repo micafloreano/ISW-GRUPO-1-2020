@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <b>Datos de la tarjeta</b>
+    <form [formGroup]="cardForm">
+        <div class="col-12 mt-2">
+            <div class="form-group">
+                <input type="text" class="form-control" id="nombreApellidoCardId" placeholder="Nombre y Apellido"
+                    name="nombreApellidoCardId" formControlName="nombreForm">
+            </div>
+            <div class="form-group">
+                <input type="text" pattern="\d*" maxlength="16" class="form-control" id="nroTarjetID" name="nroTarjetID"
+                    formControlName="numeroForm" placeholder="Numero de la tarjeta" (keydown)="setCardBrand()">
+                <small id="emailHelp" class="form-text text-muted">Solo se permite tarjeta visa</small>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" pattern="\d*" maxlength="4" class="form-control" placeholder="CVV" name="cvvID"
+                        formControlName="cvvForm">
+                </div>
+                <div class="col">
+                    <select id="mesSelect" class="form-control" name="mesid" formControlName="mesForm">
+                        <option value="">Mes</option>
+                        <ng-container *ngFor="let mes of getMeses()">
+                            <option [value]="mes">{{ mes }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="anoselect" class="form-control" name="anoid" formControlName="anoForm">
+                        <option value="">Año</option>
+                        <ng-container *ngFor="let ano of getAnos()">
+                            <option [value]="ano">{{ ano }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

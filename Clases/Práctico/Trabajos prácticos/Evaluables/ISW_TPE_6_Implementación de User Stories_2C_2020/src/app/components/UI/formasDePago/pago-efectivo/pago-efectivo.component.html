@@ -1,0 +1,30 @@
+<div class="row justify-content-center mt-2">
+
+    <div class="input-group-prepend">
+        <div class="input-group-text">$</div>
+    </div>
+    <form [formGroup]="EfectivoForm">
+    <input type="number" class="form-control" id="montoid" name="monto" placeholder="Monto a abonar" 
+    formControlName="precioPedido"
+                value=10 >
+                <span class="help-block" *ngIf="((EfectivoForm.get('precioPedido').touched ||
+                EfectivoForm.get('precioPedido').dirty) &&
+                EfectivoForm.get('precioPedido').errors)">
+                                                <span *ngIf="EfectivoForm.get('precioPedido').errors.required">
+                                                    <h6>Campo requerido</h6>
+                                                </span>
+
+                </span>
+                <span *ngIf="isMontoInvalido()">
+                    <h6>El monto debe ser mayor a {{this.precioPedido}}</h6>
+                </span>
+</form>
+
+<div class="col-10">
+    <hr>
+    <h4>Su vuelto:</h4>
+    <h4 class="text-center">
+      ${{ vuelto }}
+    </h4>
+  </div>
+</div>

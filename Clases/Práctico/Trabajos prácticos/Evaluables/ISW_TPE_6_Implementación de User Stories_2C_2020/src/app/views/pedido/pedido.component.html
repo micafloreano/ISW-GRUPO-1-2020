@@ -1,0 +1,65 @@
+<ng-container *ngIf="!isLoading">
+    <div class="row mt-4" >
+        <div class="col-12">
+            <div class="ml-1 clickeable" style="color: gray;" (click)="prevStep()">
+                <i class="fa fa-chevron-left fa-2x " aria-hidden="true"></i>
+            </div>
+    
+            <h1 class="text-center" style="margin-top: -2.4rem;font-family:'Impact', Charcoal, sans-serif ;">
+                Pedir "Lo que sea"
+            </h1>
+        </div>
+    </div>
+    <br>
+    
+    <ng-container [ngSwitch]="step">
+        <div class="full-height">
+            <app-pedido-component 
+                [(precio)]="pedido.pago.montoPagar" 
+                [(descripcion)]="pedido.descripcion"
+                [(direccionRetiroDelProducto)]="pedido.direccionRetiroDelProducto" 
+                [(imagen)]="pedido.imagen" 
+                (validEvent)="setValidacion( 0, $event )"
+                *ngSwitchCase="0"></app-pedido-component>
+    
+    
+            <app-direccion 
+                [(localidades)]="localidades" 
+                [(ciudad)]="pedido.direccionEntrega.ciudad" 
+                [(calle)]="pedido.direccionEntrega.calle" 
+                [(numero)]="pedido.direccionEntrega.numero" 
+                [(referencia)]="pedido.direccionEntrega.referencia" 
+                [(latitud)]="pedido.direccionEntrega.latitud" 
+                [(longitud)]="pedido.direccionEntrega.longitud" 
+                (validEvent)="setValidacion( 1, $event )"
+                 *ngSwitchCase="1"></app-direccion>
+    
+                 
+            <app-forma-pago-component 
+                [(pago)]="pedido.pago"
+                (validEvent)="setValidacion( 2, $event )"
+                *ngSwitchCase="2"></app-forma-pago-component>
+
+
+            <app-forma-entrega-component 
+                [(entrega)]="pedido.entrega"
+                [(pago)]="pedido.entrega"
+                (validEvent)="setValidacion( 3, $event )"
+                *ngSwitchCase="3"></app-forma-entrega-component>
+
+
+            <app-resumen-pedido 
+                [pedido]="pedido"
+                (validEvent)="setValidacion( 4, $event )"
+                *ngSwitchCase="4"></app-resumen-pedido>
+
+            <app-feedback-component *ngSwitchCase="5"></app-feedback-component>
+    
+        </div>
+    </ng-container>
+    
+    <button type="button" *ngIf="step<5" class="align-self-end btn btn-lg btn-block btn-warning" style="margin-top: auto;"
+        (click)="nextStep()">Siguiente</button>
+</ng-container>
+
+<app-spinner *ngIf="isLoading"></app-spinner>

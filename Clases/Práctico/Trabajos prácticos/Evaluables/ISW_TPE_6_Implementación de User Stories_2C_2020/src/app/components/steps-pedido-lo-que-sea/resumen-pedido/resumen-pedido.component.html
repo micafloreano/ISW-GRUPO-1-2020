@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-10">
+    <h5 class="text-center">Resumen del pedido</h5>
+  </div>
+
+  <div class="col-10">
+    <b>Descripcion: </b> {{ pedido.descripcion }} <br>
+    <b>Direccion de retiro del producto: </b>
+    {{ pedido.direccionRetiroDelProducto }} <br>
+
+    <div *ngIf="url">
+      <img [src]="url" class="img-fluid" alt="" />
+    </div>
+    <hr />    
+        <b>Forma de pago: </b> {{ pedido.pago.formaDePago }} <br>
+        <b>Precio del producto: </b> {{ pedido.pago.montoPagar }} <br>
+        <div *ngIf="pedido.pago.formaDePago === 'Efectivo'">
+            <b>Monto a abonar: </b> {{ pedido.pago.conCuantoPaga }} <br>
+            <b>Vuelto: </b> {{ pedido.pago.conCuantoPaga - pedido.pago.montoPagar }} <br>
+        </div>
+        <div *ngIf="pedido.pago.tarjeta.numero">
+            <b>Tarjeta terminada en: </b> {{ pedido.pago.tarjeta.numero.substr(pedido.pago.tarjeta.numero.length - 4) }} <br>
+        </div>
+        
+    <hr />
+    <b>Ciudad: </b> {{ pedido.direccionEntrega.ciudad }} <br>
+    <div *ngIf="pedido.direccionEntrega.calle">
+      <b>Calle: </b> {{ pedido.direccionEntrega.calle }} <br>
+      <b>Numero: </b> {{ pedido.direccionEntrega.numero }} <br>
+    </div>
+    <b>Referencia: </b> {{ pedido.direccionEntrega.referencia }} <br>
+
+    <hr>
+    <b>Forma de entrega: </b> {{ pedido.entrega.formaDeEntrega  }} <br>
+    <div *ngIf="pedido.entrega.fechaHora">
+        <b>Fecha y hora: </b> {{ pedido.entrega.fechaHora }} <br>
+    </div>
+    
+  </div>
+</div>

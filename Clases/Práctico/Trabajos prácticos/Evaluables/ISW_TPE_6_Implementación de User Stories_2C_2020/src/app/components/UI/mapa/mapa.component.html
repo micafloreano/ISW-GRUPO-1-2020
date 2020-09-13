@@ -1,0 +1,4 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]=15 (mapReady)="onMapReady($event)">
+  <agm-marker *ngIf="latM && lngM" [latitude]="latM" [longitude]="lngM"></agm-marker>
+</agm-map>
+

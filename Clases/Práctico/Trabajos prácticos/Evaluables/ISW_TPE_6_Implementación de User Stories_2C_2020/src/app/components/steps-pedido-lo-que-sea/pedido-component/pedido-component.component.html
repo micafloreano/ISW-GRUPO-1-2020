@@ -1,0 +1,63 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-10 col-md-6">
+        <form [formGroup]="PedidoForm">
+
+            <div class="form-group">
+                <label for="id-producto"><strong>¿Que debe buscar el cadete? </strong> </label>
+                <textarea class="form-control" name="descripcion" id="id-producto" cols="30" rows="3"
+                    placeholder="describa su pedido " formControlName="descripcionPedido"></textarea>
+                <span class="invalid-feedback d-block" *ngIf="((PedidoForm.get('descripcionPedido').touched ||
+                PedidoForm.get('descripcionPedido').dirty) &&
+                PedidoForm.get('descripcionPedido').errors)">
+                    <span *ngIf="PedidoForm.get('descripcionPedido').errors.required">
+                        <h6>Campo requerido</h6>
+                    </span>
+                    <span *ngIf="PedidoForm.get('descripcionPedido').errors.maxlength">
+                        <h6>Ingrese como maximo 500 caracteres </h6>
+                    </span>
+
+                </span>
+
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                </div>
+                <input type="number" class="form-control" id="precioProductoid" placeholder="Precio del producto"
+                    name="precioProducto" formControlName="precioPedido" value=10>
+                <div class="invalid-feedback d-block" *ngIf="((PedidoForm.get('precioPedido').touched ||
+                                            PedidoForm.get('precioPedido').dirty) &&
+                                            PedidoForm.get('precioPedido').errors)">
+                    <span *ngIf="PedidoForm.get('precioPedido').errors.required">
+                        <h6>Campo requerido</h6>
+                    </span>
+                    <span *ngIf="PedidoForm.get('precioPedido').errors.pattern">
+                        <h6>Formato no válido</h6>
+                    </span>
+                    <span *ngIf="esNoValido()">
+                        <h6>Monto inválido</h6>
+                    </span>
+                </div>
+            </div>
+
+            <input type="string" class="form-control mt-1" id="direccionLocal"
+            placeholder="Dirección de retiro del producto" name="direccionBusqueda"
+            formControlName="direccionBusqueda">
+        <div class="invalid-feedback d-block"
+        *ngIf="((PedidoForm.get('direccionBusqueda').touched ||
+                                            PedidoForm.get('direccionBusqueda').dirty) &&
+                                            PedidoForm.get('direccionBusqueda').errors)">
+           <span *ngIf="PedidoForm.get('direccionBusqueda').errors.required">
+            <h6>Campo requerido</h6>
+           </span>
+        </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-xs-6">
+        <app-upload-image (fileSeleccionado)="selectImage($event)"></app-upload-image>
+    </div>
+</div>

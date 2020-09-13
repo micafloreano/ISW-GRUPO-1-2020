@@ -1,0 +1,7 @@
+.full-height {
+    min-height: 30rem;
+}
+
+.clickeable{
+    cursor: pointer;
+}

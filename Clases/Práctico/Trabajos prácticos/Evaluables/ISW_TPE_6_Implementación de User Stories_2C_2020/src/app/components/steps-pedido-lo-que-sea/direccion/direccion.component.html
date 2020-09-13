@@ -1,0 +1,63 @@
+<div class="row justify-content-center mt-2">
+  <div class="col-10 col-md-6">
+    <form [formGroup]="DireccionForm">
+      <div class="form-group">
+        <select class="form-control max-width" id="ciudadSelect" name="ciudad" formControlName="ciudadPedido">
+          <option value="">Seleccione su ciudad</option>
+          <ng-container *ngFor="let loc of localidades">
+          <option [value]="loc.nombre">{{ loc.nombre }}</option>
+          </ng-container>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Calle" name="calle" 
+        formControlName="callePedido">
+        <span class="help-block" *ngIf="((DireccionForm.get('callePedido').touched ||
+        DireccionForm.get('callePedido').dirty) &&
+        DireccionForm.get('callePedido').errors)">
+                    <span *ngIf="DireccionForm.get('callePedido').errors.requiereDireccion">
+                        <h6>Campo requerido</h6>
+                    </span>
+                    <span *ngIf="DireccionForm.get('callePedido').errors.maxlength">
+                        <h6>Ingrese como máximo 100 caracteres </h6>
+                    </span>
+                
+         </span>
+      </div> 
+      <div class="form-group">
+          <input type="text" class="form-control" placeholder="Altura" name="Numero" 
+            formControlName="numeroPedido">
+          <span class="help-block" *ngIf="((DireccionForm.get('numeroPedido').touched ||
+            DireccionForm.get('numeroPedido').dirty) &&
+            DireccionForm.get('numeroPedido').errors)">
+              <span *ngIf="DireccionForm.get('numeroPedido').errors.requiereDireccion">
+                  <h6>Campo requerido</h6>
+              </span>
+              <span *ngIf="DireccionForm.get('numeroPedido').errors.pattern">
+                <h6>Ingrese entre 2 y 4 dígitos numéricos</h6>
+              </span>
+          
+          </span>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control"  placeholder="Referencia (opcional)" 
+        name="referencia" 
+        formControlName="referenciaPedido">
+        <span class="help-block" *ngIf="((DireccionForm.get('referenciaPedido').touched ||
+        DireccionForm.get('referenciaPedido').dirty) &&
+        DireccionForm.get('referenciaPedido').errors)">
+                    <span *ngIf="DireccionForm.get('referenciaPedido').errors.maxlength">
+                        <h6>Ingrese como máximo 150 caracteres </h6>
+                    </span>
+                
+        </span>
+      </div>
+    </form>
+  </div>
+
+    <div class="col-10">
+      <app-mapa [lat]="lat" [lng]="lng" [latM]="latitud" [lngM]="longitud" (coordenadas)="setCoordenadas( $event )"></app-mapa>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="row justify-content-center mt-2">
+    <div class="col-10 col-md-6">
+      <div class="form-group">
+        <label for="ciudadSelect">Forma de pago:</label>
+        <select class="form-control max-width" id="ciudadSelect" 
+            name="ciudadSelect"
+            [(ngModel)]="pago.formaDePago" (change)="setFormaDePago()">
+          <ng-container *ngFor="let fdp of formasDePago">
+            <option [value]="fdp.value">{{ fdp.nombre }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-10">
+      <hr>
+      <app-pago-efectivo [(monto)]="pago.conCuantoPaga" [precioPedido]="pago.montoPagar" (validEvent)="isValid($event)" *ngIf="pago.formaDePago === 'Efectivo'"></app-pago-efectivo>
+      <app-credit-card [(card)]="pago.tarjeta" (validEvent)="isValid($event)" *ngIf="pago.formaDePago === 'TarjetaCredito'"></app-credit-card>
+    </div>
+</div>
